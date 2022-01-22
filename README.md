@@ -1,2 +1,2 @@
 # kop-chronik
-<img src="client/assets/preview.png">
+<img src="client/public/assets/preview.png">
