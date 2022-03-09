@@ -1,19 +1,26 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
-
+import { useEffect } from "react";
 
 export default function IncidentSelector() {
     const { district } = useParams();
     const switchBtn = useSelector((state) => state.switchBtn || null);
     const incidents = useSelector((state) => state.incidents || null);
-    console.log("incidents", incidents)
+
     const incByDistrict = useSelector(
         (state) =>
             state.incidents &&
             state.incidents.filter((inc) => inc.district == district || null)
     );
+    // const sv_img = useSelector(
+    //     (state) =>
+    //         state.incidents &&
+    //         state.incidents.filter(
+    //             (inc) =>
+    //                 inc.sv_img.fields.file.url || null
+    //         )
+    // );
 
     return (
         <>
@@ -32,7 +39,7 @@ export default function IncidentSelector() {
                                   <div className="incident-img">
                                       <img
                                           className="incident-img"
-                                          src={inc.img_url}
+                                          src={inc.sv_img.fields.file.url}
                                           alt={`${inc.first} ${inc.last}`}
                                       />
                                   </div>
@@ -57,7 +64,9 @@ export default function IncidentSelector() {
                                   <div className="incident-img">
                                       <img
                                           className="incident-img"
-                                          src={inc.img_url}
+                                          //   src={inc.img_url}
+                                          //   src={`http:${sv_img}`}
+                                          src={`http:${inc.sv_img.fields.file.url}`}
                                           alt={`${inc.first} ${inc.last}`}
                                       />
                                   </div>

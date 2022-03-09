@@ -1,6 +1,6 @@
 import { BrowserRouter, Route } from "react-router-dom";
 import { createClient } from "contentful";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import IncidentSelector from "./incident-selector";
 import StreetView from "./streetview";
@@ -20,6 +20,7 @@ export default function App() {
     const overlay = useSelector((state) => state.overlay || null);
     const switchBtn = useSelector((state) => state.switchBtn || null);
     const burgerBtn = useSelector((state) => state.burgerBtn || null);
+    // const [images, setImages] = useState([]);
 
     useEffect(() => {
         const client = createClient({
@@ -43,6 +44,11 @@ export default function App() {
             incidents = incidents.sort(byDate);
             dispatch(receiveIncidents(incidents));
         });
+        // fetch("/images.json")
+        //     .then((response) => response.json())
+        //     .then((results) => {
+        //         setImages(results);
+        //     });
     }, []);
 
     return (

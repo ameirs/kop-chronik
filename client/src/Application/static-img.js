@@ -2,15 +2,21 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import ReactStreetview from "react-streetview";
-
-// import OvalTsContainer from "./user-feed";
+import { useSelector } from "react-redux";
 
 export default function StaticImg() {
+    // const dispatch = useDispatch();
+    // const sv_img = useSelector(
+    //     (state) =>
+    //         state.incidents &&
+    //         state.incidents.filter(
+    //             (inc) => inc.sv_img.fields.file.url == url || null
+    //         )
+    // );
+
     const googleMapsApiKey = "AIzaSyDeCq5mnB7lE9dnj1PwOYeEvrosngd0sHY";
     const signature = "fd87wK0MDkUrZESaf_nMIwWzli8=";
-
     const [staticImg, setStaticImg] = useState([]);
-
     const lat = 52.5366132;
     const lng = 13.4009558;
     const heading = 150;
@@ -23,14 +29,6 @@ export default function StaticImg() {
             setStaticImg(results.url);
         });
     }, []);
-
-    // useEffect(() => {
-    //     fetch("/testimonies.json")
-    //         .then((resp) => resp.json())
-    //         .then((results) => {
-    //             setUsers(results);
-    //         });
-    // }, []);
 
     useEffect(() => {
         console.log("staticImg -> ", staticImg);
