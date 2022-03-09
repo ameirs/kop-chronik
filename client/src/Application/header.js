@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleSwitchBtn } from "../redux/switch/slice.js";
 import { toggleBurgerBtn } from "../redux/burger/slice.js";
-import { hideOverlay } from "../redux/overlay/slice.js";
 
 export default function Header() {
         const dispatch = useDispatch();  
-        
-        
+           
     return (
         <>
             <div className="logo-container">

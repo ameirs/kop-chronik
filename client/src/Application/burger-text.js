@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { hideOverlay } from "../redux/overlay/slice.js";
 import { toggleBurgerBtn } from "../redux/burger/slice.js";
 
 export default function Burger() {
-     const dispatch = useDispatch();  
+    const dispatch = useDispatch();
     const burgerBtn = useSelector((state) => state.burgerBtn || null);
 
     return (

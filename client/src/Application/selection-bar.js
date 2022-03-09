@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SlideDown } from "react-slidedown";
 import { jsPDF } from "jspdf";
-// import logo from "../assets/icons/logo.svg";
 
 export default function SelectionBar() {
     const { id } = useParams();
@@ -22,7 +20,6 @@ export default function SelectionBar() {
 ${incident[0].description}
 ${incident[0].crim_proc}`;
         var splitText = doc.splitTextToSize(textBody, 180);
-        // doc.addImage(logo, "SVG", 65, 20, 500)
         doc.text(splitText, 1, 10);
         doc.save("a4.pdf");
     };
