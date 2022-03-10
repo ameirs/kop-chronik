@@ -1,14 +1,17 @@
 const path = require("path");
-// const dotenv = require("dotenv")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-// const webpack = require("webpack");
 const CompressionPlugin = require("compression-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin =
+    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 
 module.exports = () => ({
-    mode: "production",
-    
+    mode: "development",
+   
+    optimization: {
+        usedExports: true,
+    },
     entry: [
         "@babel/polyfill",
         path.join(__dirname, "client", "src", "styles/style.css"),
@@ -30,11 +33,7 @@ module.exports = () => ({
         },
         port: "3000",
     },
-    // mode: "production",
-    // optimization: {
-    //     nodeEnv: "production",
-    //     minimize: true,
-    // },
+
     optimization: {
         minimize: true,
         minimizer: [new TerserPlugin()],
@@ -44,6 +43,7 @@ module.exports = () => ({
         rules: [
             {
                 test: /\.js$/,
+                exclude: /node_modules/,
                 loader: "babel-loader",
             },
             {
@@ -60,6 +60,7 @@ module.exports = () => ({
                         loader: "css-loader",
                         options: {
                             url: false,
+
                         },
                     },
                 ],
@@ -79,6 +80,9 @@ module.exports = () => ({
             filename: "bundle.css",
         }),
         new CompressionPlugin(),
+        // new BundleAnalyzerPlugin({
+        //     generateStatsFile:true
+        // }),
 
         // new webpack.DefinePlugin({
         //     "process.env": JSON.stringify(process.env),
