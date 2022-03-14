@@ -1,17 +1,24 @@
+import React, { Suspense } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { createClient } from "contentful";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import IncidentSelector from "./incident-selector";
-import StreetView from "./streetview";
+// import IncidentSelector from "./incident-selector";
 import Header from "./header";
-import DdDistrict from "./dd-district";
-import DdYear from "./dd-year";
 import SelectionBar from "./selection-bar";
 import OverlayStart from "./overlay-start";
 import Burger from "./burger-text";
 import { useDispatch } from "react-redux";
 import { receiveIncidents } from "../redux/incidents/slice.js";
+
+const DdDistrict = React.lazy(() => import("./dd-district"));
+const DdYear = React.lazy(() => import("./dd-year"));
+const StreetView = React.lazy(() => import("./streetview"));
+const IncidentSelector = React.lazy(() => import("./incident-selector"));
+import Loader from "./loader";
+// import DdDistrict from "./dd-district";
+// import DdYear from "./dd-year";
+// import StreetView from "./streetview";
 
 const googleKey = "AIzaSyDeCq5mnB7lE9dnj1PwOYeEvrosngd0sHY";
 
@@ -64,33 +71,39 @@ export default function App() {
                 </header>
                 <Route exact path="/">
                     <nav>
-                        <DdDistrict />
-                        <DdYear />
+                        <Suspense fallback={<Loader />}>
+                            <DdDistrict />
+                        </Suspense>
+                        <Suspense fallback={<Loader />}>
+                            <DdYear />
+                        </Suspense>
                     </nav>
                     <div className="main-incident-container">
-                        <IncidentSelector />
+                        <Suspense fallback={<Loader />}>
+                            <IncidentSelector />
+                        </Suspense>
                     </div>
                 </Route>
             </div>
             <Route path="/incidents/:district">
                 <nav>
-                    <DdDistrict />
-                    <DdYear />
+                    <Suspense fallback={<Loader />}>
+                        <DdDistrict />
+                    </Suspense>
+                    <Suspense fallback={<Loader />}>
+                        <DdYear />
+                    </Suspense>
                 </nav>
-                {/* <div className={`${switchBtn ? "main-incident-container" : "main-incident-container blur"}`}> */}
                 <div className="main-incident-container">
                     <IncidentSelector />
                 </div>
             </Route>
-
             <Route path="/incident/:id">
-                {/* <QRCode value="http://facebook.github.io/react/" /> */}
-
-                {/* <nav> */}
                 <SelectionBar />
-                {/* </nav> */}
                 <div className="main-streetview-container">
-                    <StreetView />
+                    <Suspense fallback={<Loader />}>
+                        <StreetView />
+                    </Suspense>
                 </div>
             </Route>
         </BrowserRouter>
