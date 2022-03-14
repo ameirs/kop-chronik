@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function IncidentSelector() {
     const { district } = useParams();
     const switchBtn = useSelector((state) => state.switchBtn || null);
-    const incidents = useSelector((state) => state.incidents || null);
+    const incidents = useSelector((state) => state.incidents);
 
     const incByDistrict = useSelector(
         (state) =>

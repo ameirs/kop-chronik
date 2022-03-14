@@ -32,7 +32,7 @@ export default function App() {
                 return {
                     ...inc.fields,
                     id: inc.sys.id,
-                    img_url: `${inc.fields.img_url}${googleKey}`,
+                    // img_url: `${inc.fields.img_url}${googleKey}`,
                     date: new Intl.DateTimeFormat("en-GB", {
                         dateStyle: "long",
                     }).format(new Date(inc.fields.date)),
@@ -42,6 +42,9 @@ export default function App() {
                 return new Date(b.date).valueOf() - new Date(a.date).valueOf();
             }
             incidents = incidents.sort(byDate);
+
+            incidents = incidents.filter(inc => inc.sv_img != undefined)
+        
             dispatch(receiveIncidents(incidents));
         });
         // fetch("/images.json")

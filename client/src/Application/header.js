@@ -27,7 +27,6 @@ export default function Header() {
                 <img
                     className=""
                     onClick={() => dispatch(toggleBurgerBtn(true))}
-                    // onClick={() => dispatch(hideOverlay(true))}
                     src="../assets/icons/burger.svg"
                     alt="burger menu"
                 />

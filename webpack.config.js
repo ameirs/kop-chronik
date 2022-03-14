@@ -30,11 +30,6 @@ module.exports = () => ({
         },
         port: "3000",
     },
-    // mode: "production",
-    // optimization: {
-    //     nodeEnv: "production",
-    //     minimize: true,
-    // },
     optimization: {
         minimize: true,
         minimizer: [new TerserPlugin()],
