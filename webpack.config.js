@@ -33,10 +33,7 @@ module.exports = () => ({
         },
         port: "3000",
     },
-<<<<<<< HEAD
-=======
 
->>>>>>> bba068220566a25defc9eadb5b60f15aa7008185
     optimization: {
         minimize: true,
         minimizer: [new TerserPlugin()],
